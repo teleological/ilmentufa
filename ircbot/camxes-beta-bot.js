@@ -1,6 +1,6 @@
 var config = {
   server: 'irc.freenode.net',
-  nick: 'cipra',
+  nick: 'camxes-beta',
   options: {
     channels: ['#ilmen', '#lojban', '#ckule'],
     debug: false
@@ -14,7 +14,7 @@ client.addListener('message', function(from, to, text, message) {
     processor(client, from, to, text, message);
 });
 
-var camxes = require('../camxes-exp.js');
+var camxes = require('../camxes-beta.js');
 var camxes_pre = require('../camxes_preproc.js');
 var camxes_post = require('../camxes_postproc.js');
 
@@ -31,6 +31,10 @@ var processor = function(client, from, to, text, message) {
     sendTo = to; // send publicly
   }
   if (sendTo == to) {  // Public
+    if (text.match(/^<(.*?)>: /, '') !== null) { // Dealing with Slack
+      from = text.match(/^<(.*?)>: /,'')[1];
+      text = text.replace(/^<.*?>: /,"");
+    }
     if (text.indexOf(config.nick + ": ") == '0') {
       text = text.substr(config.nick.length + 2);
       var ret = extract_mode(text);
@@ -74,3 +78,4 @@ function run_camxes(input, mode) {
 	}
 	return result;
 }
+

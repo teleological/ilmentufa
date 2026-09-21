@@ -2,6 +2,10 @@ body, textarea {
     font-family: sans-serif !important;
 }
 
+body {
+    height: 100vh;
+}
+
 span.translation {
     color: #aaaaaa;
     font-style: italic;
@@ -132,6 +136,10 @@ li.implicit {
 
 .box.box-sumti {
     background: #f099aa;
+}
+
+.box.box-sumti-fai {
+    background: #dd9966;
 }
 
 .box.box-sumti1 {
